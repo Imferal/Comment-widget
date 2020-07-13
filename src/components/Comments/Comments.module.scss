@@ -1,0 +1,43 @@
+@import "./../../_theme/colors.scss";
+
+:local(.comment) {
+  background-color: white;
+  border: 1px solid $COLOR_PRIMARY;
+  font-family: "roboto", serif;
+  margin: 1rem auto 0.2rem;
+}
+
+:local(.author) {
+  font-family: 'Forum', serif;
+  font-weight: bold;
+  padding: 0.4rem;
+  text-align: right;
+}
+
+:local(.text) {
+  padding: 0.4rem;
+
+  font-style: italic;
+}
+
+:local(.dateTime) {
+  font-size: 0.7rem;
+  font-family: 'Forum', serif;
+  padding: 0.2rem 0.4rem;
+  text-align: right;
+}
+
+:local(.btn_container) {
+  display: flex;
+  justify-content: right;
+}
+
+:local(.delete) {
+  background-color: $COLOR_S_LIGHT;
+  border: none;
+  cursor: pointer;
+  font-size: 0.6rem;
+  font-weight: 300;
+  padding-right: 0.4em;
+  text-decoration: underline;
+}

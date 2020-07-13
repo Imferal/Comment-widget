@@ -1,0 +1,32 @@
+@import "./../../_theme/colors.scss";
+
+.comments {
+  margin: 1em auto 0;
+  position: relative;
+  padding: 1rem;
+  background-color: $COLOR_S_LIGHT;
+}
+
+@media screen and (min-width: 480px) {
+  .comments {
+    width: calc(480px - 2rem);
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .comments {
+    width: calc(640px - 2rem);
+  }
+}
+
+// @media screen and (min-width: 960px) {
+//   .comments {
+//     width: calc(960px - 2rem);
+//   }
+// }
+
+// @media screen and (min-width: 1280px) {
+//   .comments {
+//     width: calc(1280px - 2rem);
+//   }
+// }

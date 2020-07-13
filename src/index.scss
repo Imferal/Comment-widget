@@ -1,0 +1,75 @@
+@import "./_theme/colors.scss";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  width: 100%;
+
+  font-family: "Forum", cursive;
+
+  background-color: #ecf0f1;
+  color: #34495e;
+  font-size: 20px;
+}
+
+h1 {
+  color: white;
+  font-size: 2.5em;
+  text-align: center;
+  font-weight: 400;
+  line-height: 0;
+  padding: 2rem 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin-top: 1rem;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+h3 {
+  border-top: 1px solid $COLOR_DARK;
+  font-size: 1em;
+
+  font-weight: 400;
+  line-height: 0;
+  margin: 0;
+
+  padding: 1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none;
+}
+
+li {
+  list-style: none;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+}
+
+@media screen and (max-width: 960px) {
+  * {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  * {
+    font-size: 12px;
+  }
+}
