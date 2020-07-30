@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from './CommentNew.module.scss';
-import {addComment} from '../../redux/state';
+import {
+  updateEditableCommentActionCreator,
+  addCommentActionCreator,
+} from '../../redux/state';
 
 export default function CommentNew (props) {
+  // debugger;
   let newCommentText = React.createRef ();
   let newCommentAuthor = React.createRef ();
 
@@ -24,19 +28,16 @@ export default function CommentNew (props) {
       newCommentAuthor.current.className = styles.author;
       newCommentText.current.className = styles.text + ' ' + styles.text_indent;
 
-      let commentDate = new Date () + ''; // Получаем текущую дату в строковом формате
-      let newCommentData = {
-        id: 5,
-        date: commentDate, // Создаём дату коммента
-        author: newCommentAuthor.current.value,
-        text: newCommentText.current.value,
-      };
-
-      addComment (newCommentData); // Добавляем коммент в стейт
-
-      // Обнуляем поля формы после отправки
-      newCommentText.current.value = newCommentAuthor.current.value = '';
+      // Если поля не пустые
+      props.dispatch (addCommentActionCreator ()); // Добавляем коммент в стейт
     }
+  };
+
+  // Редактирование комментария
+  const onCommentChange = () => {
+    props.dispatch (
+      updateEditableCommentActionCreator (newCommentAuthor, newCommentText)
+    );
   };
 
   return (
@@ -45,14 +46,22 @@ export default function CommentNew (props) {
 
       <label className={styles.label}>
         Your name:
-        <input ref={newCommentAuthor} className={styles.author} type="text" />
+        <input
+          ref={newCommentAuthor}
+          onChange={onCommentChange}
+          className={styles.author}
+          type="text"
+          value={props.state.editableCommentAuthor}
+        />
       </label>
       <label className={styles.label}>
         Comment:
         <textarea
           ref={newCommentText}
+          onChange={onCommentChange}
           className={styles.text + ' ' + styles.text_indent}
           id=""
+          value={props.state.editableCommentText}
         />
       </label>
       <div className={styles.btn_container}>

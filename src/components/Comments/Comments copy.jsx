@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Comments.module.scss';
-import {deleteCommentActionCreator} from '../../redux/state';
+import {deleteComment} from '../../redux/state';
 
 export default function Comments (props) {
   let publishedComments = props.state.commentsData.map ((comment, i) => (
@@ -27,7 +27,9 @@ export default function Comments (props) {
   ));
 
   const deleteOldComment = key => {
-    props.dispatch (deleteCommentActionCreator (key));
+    console.log (props);
+    console.log (key);
+    deleteComment (key);
   };
 
   return (

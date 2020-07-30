@@ -1,30 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
-import state, {subscribe, deleteComment, addComment} from './redux/state';
+import './index.scss';
+
+import store from './redux/state';
 import App from './components/App/App';
 
 let rerender = state => {
   ReactDOM.render (
     <React.StrictMode>
-      <App
-        state={state}
-        addComment={addComment}
-        deleteComment={deleteComment}
-      />
+      <App state={store.getState ()} dispatch={store.dispatch.bind (store)} />
     </React.StrictMode>,
     document.getElementById ('root')
   );
 };
 
-rerender (state);
+rerender (store.getState ());
 
 // Отдаём наш rerender в state
-subscribe (rerender);
+store.subscribe (rerender);
 
 // Работа в офлайн
-serviceWorker.register (state);
-
-//// ДОБАВИТЬ ПРОВЕРКУ НА ЗАПОЛНЕННОСТЬ ПОЛЕЙ
+serviceWorker.register (store);
