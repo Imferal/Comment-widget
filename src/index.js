@@ -4,10 +4,15 @@ import * as serviceWorker from './serviceWorker';
 
 import './index.scss';
 
-import store from './redux/state';
 import App from './components/App/App';
+import {loadCommentsActionCreator} from './redux/reducerComments';
+import store from './redux/reduxStore';
 
-let rerender = state => {
+// Загружаем сохранённые комментарии
+store.dispatch (loadCommentsActionCreator ());
+
+let rerender = () => {
+  // debugger;
   ReactDOM.render (
     <React.StrictMode>
       <App state={store.getState ()} dispatch={store.dispatch.bind (store)} />
@@ -16,10 +21,14 @@ let rerender = state => {
   );
 };
 
+// Первично отрисовываем страницу
 rerender (store.getState ());
 
 // Отдаём наш rerender в state
-store.subscribe (rerender);
+store.subscribe (() => {
+  let state = store.getState ();
+  rerender (state);
+});
 
 // Работа в офлайн
 serviceWorker.register (store);

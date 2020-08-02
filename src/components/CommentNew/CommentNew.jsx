@@ -3,38 +3,41 @@ import styles from './CommentNew.module.scss';
 import {
   updateEditableCommentActionCreator,
   addCommentActionCreator,
-} from '../../redux/state';
+} from '../../redux/reducerComments';
 
 export default function CommentNew (props) {
-  // debugger;
   let newCommentText = React.createRef ();
   let newCommentAuthor = React.createRef ();
 
   // Функция добавления комментария
   const addNewComment = e => {
     e.preventDefault ();
-
     // Проверка полей на пустоту
-    if (newCommentAuthor.current.value === '') {
-      newCommentAuthor.current.className += ' ' + styles.error;
-      if (newCommentText.current.value === '') {
-        newCommentText.current.className += ' ' + styles.error;
-      }
-      return;
-    } else if (newCommentText.current.value === '') {
-      newCommentText.current.className += ' ' + styles.error;
-      return;
-    } else {
-      newCommentAuthor.current.className = styles.author;
-      newCommentText.current.className = styles.text + ' ' + styles.text_indent;
+    const author = newCommentAuthor.current;
+    const text = newCommentText.current;
 
-      // Если поля не пустые
+    // Cбрасываем стили перед проверкой
+    author.className = styles.author;
+    text.className = styles.text + ' ' + styles.text_indent;
+    // Если оба поля пустые
+    if (author.value === '' && text.value === '') {
+      author.className += ' ' + styles.error;
+      text.className += ' ' + styles.error;
+      // Если нет автора
+    } else if (author.value === '') {
+      author.className += ' ' + styles.error;
+      // Если нет текста
+    } else if (text.value === '') {
+      text.className += ' ' + styles.error;
+      // Если всё в порядке
+    } else {
       props.dispatch (addCommentActionCreator ()); // Добавляем коммент в стейт
     }
   };
 
   // Редактирование комментария
   const onCommentChange = () => {
+    // debugger;
     props.dispatch (
       updateEditableCommentActionCreator (newCommentAuthor, newCommentText)
     );
@@ -51,7 +54,7 @@ export default function CommentNew (props) {
           onChange={onCommentChange}
           className={styles.author}
           type="text"
-          value={props.state.editableCommentAuthor}
+          value={props.state.commentsNew.editableCommentAuthor}
         />
       </label>
       <label className={styles.label}>
@@ -61,7 +64,7 @@ export default function CommentNew (props) {
           onChange={onCommentChange}
           className={styles.text + ' ' + styles.text_indent}
           id=""
-          value={props.state.editableCommentText}
+          value={props.state.commentsNew.editableCommentText}
         />
       </label>
       <div className={styles.btn_container}>

@@ -5,7 +5,10 @@ import CommentNew from '../CommentNew/CommentNew';
 
 export default function Main (props) {
   // Скрываем заголовок, если нет добавленных комментариев/
-  let showUserComments = props.state.commentsData.length === 0 ? 'hidden' : '';
+  // debugger;
+  let showUserComments = props.state.comments.commentsData.length === 0
+    ? 'hidden'
+    : '';
 
   return (
     <section className="Main">
